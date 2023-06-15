@@ -14,22 +14,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const Home: NextPage = () => {
 	const address = useAddress();
-	const { login } = useLogin();
-	const { user, isLoggedIn } = useUser();
-	const connectionStatus = useConnectionStatus();
-
-	// login right after connection
-	const loginAttempted = useRef(false);
-
-	useEffect(() => {
-		if (loginAttempted.current) {
-			return;
-		}
-		if (connectionStatus === 'connected' && !isLoggedIn) {
-			loginAttempted.current = true;
-			login();
-		}
-	}, [connectionStatus, isLoggedIn, login]);
+	const { user } = useUser();
 
 	return (
 		<div className='container'>
